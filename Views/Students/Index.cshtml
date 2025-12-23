@@ -1,12 +1,30 @@
-@model List<MvcDemo.Models.Student>
+@model List<Student>
 
-<h2>Students List</h2>
+<h2>Students</h2>
 
-<ul>
-@foreach(var s in Model)
+<form method="post" asp-action="Create">
+    <input name="Name" placeholder="Name" />
+    <input name="Age" placeholder="Age" />
+    <button type="submit">Add</button>
+</form>
+
+<table border="1">
+    <tr>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Action</th>
+    </tr>
+
+@foreach (var s in Model)
 {
-    <li>@s.Name - @s.Age</li>
-}
-</ul>
+    <tr>
+        <td>@s.Name</td>
+        <td>@s.Age</td>
+        <td>
+            <a asp-action="Delete" asp-route-id="@s.Id">Delete</a>
+            <a asp-action="Edit" asp-route-id="@s.Id">Edit</a>
 
-<a href="/Students/Create">Add Student</a>
+        </td>
+    </tr>
+}
+</table>
